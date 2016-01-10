@@ -27,8 +27,7 @@ Music
 ├── i☆Ris - 幻想曲WONDERLAND.mp3
 └── i☆Ris - 流星.mp3
 
-$ cd Music && mkdir dst
-$ at -d /run/media/upamune/WALKMAN/Music *.mp3
+$ at -d /run/media/upamune/WALKMAN/Music Music/*.mp3
 $ tree /run/media/upamune/WALKMAN/Music
 
 Music
