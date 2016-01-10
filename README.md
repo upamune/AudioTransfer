@@ -4,15 +4,15 @@
 
 AudioTransfer is [Content Transfer](https://www.sony.jp/support/audiosoftware/contenttransfer/download/) only Audio file on CLI.
 
-Read an audio tag and copy it to ` `dst`/Artist/Album/Track-Title.Ext`
+Read an audio tag and copy it to `dst/Artist/Album/Track-Title.Ext`
 
 ## Usage
 
-`at -d `destination` `audio files` `
+`at -d [destination] [audio files..] `
 
 ## Example
 
-```bash
+```
 $ tree Music
 Music
 ├── i☆Ris - Believe in.mp3
@@ -53,7 +53,7 @@ Music
 ### Dependencies
 You must have the static [taglib](http://taglib.github.io/) libraries installed in order to compile go-taglib.
 
-```bash
+```
 $ go get -d github.com/upamune/AudioTransfer
 $ cd $GOPATH/github.com/upamune/AudioTransfer
 $ go build -o at && mv ./at $GOPATH/bin/at
