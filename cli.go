@@ -3,8 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/cheggaaa/pb"
 	"io"
 	"log"
+	"sync"
 )
 
 // Exit codes are int values that represent an exit code for a particular error.
@@ -69,9 +71,20 @@ func (cli *CLI) Run(args []string) int {
 		tracks = append(tracks, t)
 	}
 
+	bar := pb.New(len(tracks))
+	bar.Start()
+
+	wg := new(sync.WaitGroup)
 	for _, track := range tracks {
-		track.TransferTo(dst)
+		wg.Add(1)
+		go func(track Track) {
+			defer wg.Done()
+			defer bar.Increment()
+			track.TransferTo(dst)
+		}(track)
 	}
+	wg.Wait()
+	bar.FinishPrint("Complete Transfer")
 
 	return ExitCodeOK
 }
