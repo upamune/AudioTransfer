@@ -47,7 +47,7 @@ func NewTrack(fileName string) (Track, error) {
 
 // TransferTo transfer track to dir
 func (t Track) TransferTo(dir string) error {
-	dst := fmt.Sprintf("%s/%s/%s/%02d-%s%s", dir, t.Artist, t.Album, t.Number, t.Title, t.Ext)
+	dst := assemblePath(dir, t)
 	if err := os.MkdirAll(filepath.Dir(dst), 0777); err != nil {
 		log.Fatal("can't create " + filepath.Dir(dst) + "dir")
 		return err
@@ -58,6 +58,10 @@ func (t Track) TransferTo(dir string) error {
 	}
 
 	return nil
+}
+
+func assemblePath(dir string, t Track) string {
+	return fmt.Sprintf("%s/%s/%s/%02d-%s%s", dir, t.Artist, t.Album, t.Number, t.Title, t.Ext)
 }
 
 func copy(src, dst string) error {
